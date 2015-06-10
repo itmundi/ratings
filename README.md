@@ -1,10 +1,18 @@
-# ratings
+# Ratings Plugin for Craft
 Plugin to rate craft entries with simple statistics
 
-# requirements
+## Requirements
 This plugins depends on jquery and the [raty](https://github.com/wbotelhos/raty) plugin.
 
-# Installation
+## Installation
+
+To install Ratings, follow these steps:
+
+1.  Install via composer or upload the ratings/ folder to your craft/plugins/ folder.
+2.  Go to Settings > Plugins from your Craft control panel and enable the Ratings plugin.
+
+## Usage
+
 Include css
 
     <link rel="stylesheet" href="/vendor/raty/lib/jquery.raty.css" media="screen" />
