@@ -131,7 +131,7 @@ class RatingsService extends BaseApplicationComponent
      */
     public function addRating($elementId, $rating)
     {
-        if (!$this->_isInCookie($elementId)) {
+        if (!$this->_isInCookie($elementId) && $rating != '') {
             $ratingRecord = new RatingsRecord();
             $attr = array(
                 'elementId' => $elementId,

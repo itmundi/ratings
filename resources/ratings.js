@@ -6,7 +6,11 @@ var ratings = {
         cancelOff   : 'cancel-off.png',                               // Icon used on active cancel.
         cancelOn    : 'cancel-on.png',                                // Icon used inactive cancel.
         cancelPlace : 'left',                                         // Cancel's button position.
-        click       : function(score){ ratings.handleClick(this, score) }, // Callback executed on rating click.
+        click       : function(score){                                // Callback executed on rating click.
+            if($(this).data('click-submit') != false) {
+                ratings.handleClick(this, score)
+            }
+        },
         half        : true,                                           // Enables half star selection.
         halfShow    : true,                                           // Enables half star display.
         hints       : ['slecht', 'matig', 'voldoende', 'goed', 'fantastisch'], // Hints used on each star.
@@ -18,10 +22,17 @@ var ratings = {
         numberMax   : 20,                                             // Max of star the option number can creates.
         path        : undefined,                                      // A global locate where the icon will be looked.
         precision   : false,                                          // Enables the selection of a precision score.
-        readOnly    : function(){ return $(this).data('given-score') > 0 }, // Turns the rating read-only.
+        readOnly    : function(){                                     // Turns the rating read-only.
+            return $(this).data('given-score') > 0
+        },
         round       : { down: .25, full: .6, up: .76 },               // Included values attributes to do the score round math.
-        score       : function(){ return $(this).data('given-score') }, // Initial rating.
-        scoreName   : 'score',                                        // Name of the hidden field that holds the score value.
+        score       : function(){                                     // Initial rating.
+            return $(this).data('given-score')
+        },
+        scoreName   : function(){                                     // Name of the hidden field that holds the score value.
+            var name = $(this).data('name');
+            return name == ''? 'score' : name;
+        },
         single      : false,                                          // Enables just a single star selection.
         space       : true,                                           // Puts space between the icons.
         starHalf    : 'star-half.png',                                // The name of the half star image.
@@ -42,7 +53,7 @@ var ratings = {
         ratings.rate(elementId, Math.ceil(score * 2));
     },
 
-    rate: function (id, rating, element) {
+    rate: function (id, rating) {
         var data = {'id':id, 'rating':rating};
         data[window.csrfTokenName] = window.csrfTokenValue;
         $.post('/actions/ratings/rate', data );
@@ -52,3 +63,5 @@ var ratings = {
 $(function() {
     $('.raty').raty(ratings.settings);
 });
+
+window.ratings = ratings;

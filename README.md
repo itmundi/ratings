@@ -27,3 +27,10 @@ Include javascript
 Include the folowing code in your template
 
     <div class="raty" data-entry-id="{{ entry.id }}" data-given-score="{{ craft.ratings.of(entry.id) / 2 }}"></div>
+
+### Data attrbitues
+
+- data-name: Name of the hidden input
+- data-entry-id: Id of the entry to rate
+- data-given-score: Score in number of starts
+- data-click-submit: Submit rating on click, can be set to false
